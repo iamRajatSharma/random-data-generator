@@ -28,7 +28,7 @@ function App() {
                             <label><b>Enter Number of Paras</b></label>
                             <div className="input-group mt-2">
                                 <input type="text" onChange={(e) => { setNumber(e.target.value) }} className="form-control" placeholder="Enter Number of Paras" />
-                                <span onClick={() => { getData() }} className="input-group-text"><b>Generate Data</b></span>
+                                <span onClick={() => { getData() }} className="input-group-text" style={{ cursor:'pointer' }}><b>Generate Data</b></span>
                             </div>
                         </div>
                         <div className='py-4'>
