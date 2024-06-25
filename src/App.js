@@ -3,9 +3,17 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-    const [number, setNumber] = useState(0);
+    const [number, setNumber] = useState('');
     const [paras, setParas] = useState({});
     const [btn, setBtn] = useState("Genarete Data")
+    const [resetBtn, setResetBtn] = useState("Reset")
+
+    async function resetData(){
+        setResetBtn("Resetting.....")
+        setNumber('');
+        setParas('');
+        setResetBtn("Reset")
+    }
 
     async function getData() {
         setBtn("Generating......")
@@ -30,8 +38,9 @@ function App() {
                         <div>
                             <label><b>Enter Number of Paras</b></label>
                             <div className="input-group mt-2">
-                                <input type="text" onChange={(e) => { setNumber(e.target.value) }} className="form-control" placeholder="Enter Number of Paras" />
-                                <span onClick={() => { getData() }} className="input-group-text" style={{ cursor: 'pointer' }}><b>{btn}</b></span>
+                                <input type="text" onChange={(e) => { setNumber(e.target.value) }} value={number} className="form-control" placeholder="Enter Number of Paras" />
+                                <span onClick={() => { getData() }} className="input-group-text bg-success text-white" style={{ cursor: 'pointer' }}><b>{btn}</b></span>
+                                <span onClick={() => { resetData() }} className="input-group-text bg-danger text-white" style={{ cursor: 'pointer' }}><b>{resetBtn}</b></span>
                             </div>
                         </div>
                         <div className='py-4'>
