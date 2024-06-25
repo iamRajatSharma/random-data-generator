@@ -1,25 +1,48 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [number, setNumber] = useState(0);
+    const [paras, setParas] = useState({});
+
+    async function getData() {
+        const url = `https://hipsum.co/api/?type=hipster-centric&paras=${number}`;
+        fetch(url)
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => {
+                setParas((response))
+            })
+    }
+    return (
+        <div className="">
+            <div className='container'>
+                <div className="mt-4 p-5 bg-primary text-white rounded text-center">
+                    <h1>Random Text Generator</h1>
+                </div>
+                <div className='row'>
+                    <div className='col-lg-12 mt-3'>
+                        <div>
+                            <label><b>Enter Number of Paras</b></label>
+                            <div className="input-group mt-2">
+                                <input type="text" onChange={(e) => { setNumber(e.target.value) }} className="form-control" placeholder="Enter Number of Paras" />
+                                <span onClick={() => { getData() }} className="input-group-text"><b>Generate Data</b></span>
+                            </div>
+                        </div>
+                        <div className='py-4'>
+                            <label><b>Result</b></label>
+                            <div  style={{ textAlign:"justify", lineHeight:2 }}>
+                                <textarea className='form-control' rows="10"  defaultValue={paras!='' && paras.length > 0 ? paras : ''}>
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default App;
